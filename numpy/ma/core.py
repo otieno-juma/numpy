@@ -8172,6 +8172,37 @@ def convolve(a, v, mode='full', propagate_mask=True):
     See Also
     --------
     numpy.convolve : Equivalent function in the top-level NumPy module.
+
+    Examples
+    --------
+    Convolve two arrays:
+
+    >>> a = np.ma.array([1, 2, 3, 4, 5])
+    >>> v = np.ma.array([1, 1, 1])
+    >>> np.ma.convolve(a, v)
+    masked_array(data=[1, 3, 6, 9, 12, 9, 5],
+                 mask=[False, False, False, False, False, False, False],
+           fill_value=999999)
+
+    Convolve two masked arrays:
+
+    >>> a = np.ma.array([1, 2, 3, 4, 5], mask=[0, 0, 1, 0, 0])
+    >>> v = np.ma.array([1, 1, 1], mask=[0, 0, 1])
+    >>> np.ma.convolve(a, v, mode='valid')
+    masked_array(data=[--, --, --],
+                 mask=[ True,  True,  True],
+           fill_value=999999,
+                dtype=int64)
+
+    Convolve with propagate_mask=False:
+
+    >>> a = np.ma.array([1, 2, 3, 4, 5], mask=[0, 0, 1, 0, 0])
+    >>> v = np.ma.array([1, 1, 1], mask=[0, 0, 1])
+    >>> np.ma.convolve(a, v, mode='valid', propagate_mask=False)
+    masked_array(data=[2, 4, 9],
+                 mask=[False, False, False],
+           fill_value=999999)
+
     """
     return _convolve_or_correlate(np.convolve, a, v, mode, propagate_mask)
 
