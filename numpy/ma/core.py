@@ -8147,11 +8147,11 @@ def correlate(a, v, mode='valid', propagate_mask=True):
 
     Examples
     --------
-    Basic correlation:
+    Basic correlation adds a mask:
 
-    >>> a = np.ma.array([1, 2, 3])
-    >>> v = np.ma.array([0, 1, 0])
-    >>> np.ma.correlate(a, v, mode='valid')
+    >>> a = np.array([1, 2, 3])
+    >>> v = np.array([0, 1, 0])
+    >>> np.ma.correlate(a, v)
     masked_array(data=[2],
                  mask=[False],
            fill_value=999999)
@@ -8160,18 +8160,18 @@ def correlate(a, v, mode='valid', propagate_mask=True):
 
     >>> a = np.ma.array([1, 2, 3], mask=[False, True, False])
     >>> v = np.ma.array([0, 1, 0])
-    >>> np.ma.correlate(a, v, mode='valid', propagate_mask=True)
+    >>> np.ma.correlate(a, v)
     masked_array(data=[--],
                  mask=[ True],
            fill_value=999999,
                 dtype=int64)
 
-    Correlation with different modes:
+    Correlation with different modes and mixed elements:
 
-    >>> a = np.ma.array([1, 2, 3])
-    >>> v = np.ma.array([0, 1, 0])
-    >>> np.ma.correlate(a, v, mode='full')
-    masked_array(data=[0, 1, 2, 3, 0],
+    >>> a = np.array([1, 2, 3])
+    >>> v = np.ma.array([0, 1, 2], mask=[False, True, False])
+    >>> np.ma.correlate(a, v, mode='full', propagate_mask=False)
+    masked_array(data=[2, 4, 6, 0, 0],
                  mask=[False, False, False, False, False],
            fill_value=999999)
 
