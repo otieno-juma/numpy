@@ -5647,6 +5647,17 @@ class MaskedArray(ndarray):
         >>> a.argsort()
         array([1, 0, 2])
 
+        Sorting along a specific axis:
+
+        >>> a = np.ma.array([[3,2,1],[4,5,6]], mask=[[False, False, True],[False, False, False]])
+        >>> a
+        masked_array(
+                data=[[3, 2, --],
+                        [4, 5, 6]],
+                mask=[[False, False,  True],
+                        [False, False, False]],
+          fill_value=999999)
+
         """
         if stable:
             raise ValueError(
