@@ -613,6 +613,17 @@ def fromarrays(arrayList, dtype=None, shape=None, formats=None,
     rec.array([(1, b'a', 1.1), (2, b'dd', 2. ), (3, b'xyz', 3. ),
                (4, b'12', 4. )],
               dtype=[('a', '<i4'), ('b', 'S3'), ('c', '<f4')])
+
+    Creating a record array with default dtype:
+
+    >>> x1 = np.array([1, 2, 3, 4])
+    >>> x2 = np.array(['a', 'b', 'c', 'd'])
+    >>> x3 = np.array([1.1, 2, 3, 4])
+    >>> r = np.rec.fromarrays([x1, x2, x3])
+    >>> r
+    rec.array([(1, 'a', 1.1), (2, 'b', 2. ), (3, 'c', 3. ), (4, 'd', 4. )],
+              dtype=[('f0', '<i8'), ('f1', '<U1'), ('f2', '<f8')])
+
     """
 
     arrayList = [sb.asarray(x) for x in arrayList]
